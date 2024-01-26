@@ -21,7 +21,7 @@ app.post('/signup', async (req, res) => {
     try {
       const { username, email, password, accountType } = req.body;
   
-      const insertUserQuery = 'INSERT INTO users (email, password, accountType) VALUES ( ?, ?, ?)';
+      const insertUserQuery = 'INSERT INTO userInfo (email, password, accountType) VALUES ( ?, ?, ?)';
       const [result] = await db.promise().execute(insertUserQuery, [email, password, accountType]);
   
       res.status(201).json({ message: 'User registered successfully' });
@@ -37,7 +37,7 @@ app.post('/signup', async (req, res) => {
       return res.status(400).json({ message: 'Email, password, and accountType are required.' });
     }
 
-    const query = 'SELECT * FROM users WHERE email = ? AND password = ? AND accountType = ?';
+    const query = 'SELECT * FROM userInfo WHERE email = ? AND password = ? AND accountType = ?';
 
     db.query(query, [email, password, accountType], (err, results) => {
       if (err) {
