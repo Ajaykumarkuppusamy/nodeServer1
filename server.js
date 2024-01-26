@@ -21,8 +21,8 @@ app.post('/signup', async (req, res) => {
     try {
       const { username, email, password, accountType } = req.body;
   
-      const insertUserQuery = 'INSERT INTO users (username, email, password, accountType) VALUES (?, ?, ?, ?)';
-      const [result] = await db.promise().execute(insertUserQuery, [username, email, password, accountType]);
+      const insertUserQuery = 'INSERT INTO users (email, password, accountType) VALUES ( ?, ?, ?)';
+      const [result] = await db.promise().execute(insertUserQuery, [email, password, accountType]);
   
       res.status(201).json({ message: 'User registered successfully' });
     } catch (error) {
